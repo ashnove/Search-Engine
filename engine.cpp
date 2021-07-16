@@ -3,8 +3,9 @@ using namespace std;
 
 int inputmanager(char* input, Trienode* trie, Mymap* map, int k){
     char* token = strtok(input, " \t\n");
-    if(!strcmp(token,"/search"))
+    if(!strcmp(token,"/search")){
         search(token, trie, map,k);
+    }
     else if(!strcmp(token, "/df")){
         df(trie);
     }

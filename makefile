@@ -1,7 +1,7 @@
 CC = g++
 default: engine clean
-engine: engine.o readInputData.o Map.o trienode.o listnode.o search.o
-	$(CC) -o engine engine.o readInputData.o Map.o trienode.o listnode.o search.o
+engine: engine.o readInputData.o Map.o trienode.o listnode.o search.o scorelist.o maxheap.o 
+	$(CC) -o engine engine.o readInputData.o Map.o trienode.o listnode.o search.o scorelist.o maxheap.o 
 engine.o: engine.cpp engine.h
 	$(CC) -c engine.cpp 
 readInputData.o: readInputData.cpp readInputData.h
@@ -14,5 +14,9 @@ listnode.o: listnode.cpp listnode.h
 	$(CC) -c listnode.cpp
 search.o: search.cpp search.h
 	$(CC) -c search.cpp
+scorelist.o: scorelist.cpp scorelist.h
+	$(CC) -c scorelist.cpp
+maxheap.o: maxheap.cpp maxheap.h
+	$(CC) -c maxheap.cpp
 clean: 
 	rm *.o

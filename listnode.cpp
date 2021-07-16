@@ -17,3 +17,30 @@ void listnode::add(int did){
     }
     
 }
+
+int listnode::search(int did){
+    if(did == id){
+        return times;
+    }
+    else{
+        if(next==NULL)
+            return 0;
+        else
+            return next->search(did);
+    }
+}            
+
+int listnode::volume(){
+    if(next!=NULL){
+        return 1 + next->volume();
+    }
+    else 
+        return 1;
+}
+
+void listnode::passdocuments(Scorelist* scorelist){
+    scorelist->insert(id);
+    if(next!=NULL){
+        next->passdocuments(scorelist);
+    }
+}

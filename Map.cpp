@@ -1,23 +1,18 @@
 #include "Map.h"
 using namespace std;
-
-Mymap::Mymap(int size, int buffersize):size(size),buffersize(buffersize)
+Mymap::Mymap(int size,int buffersize):size(size),buffersize(buffersize)
 {
-    documents = (char**)malloc(size*sizeof(char*));
-    lengths = (int*)malloc(size*sizeof(int));
-
-    for(int i = 0; i < size; i++){
-        documents[i] = (char*)malloc(buffersize*sizeof(char));
-    }
+    documents=(char**)malloc(size*sizeof(char*));
+    lengths=(int*)malloc(size*sizeof(int));
+    for(int i=0;i<size;i++)
+        documents[i]=(char*)malloc(buffersize*sizeof(char));
 }
-
-Mymap::~Mymap(){
-    for(int i = 0; i < size; i++){
+Mymap::~Mymap()
+{
+    for(int i=0;i<size;i++)
         free(documents[i]);
-    }
     free(documents);
     free(lengths);
-
 }
 
 int Mymap::insert(char* line, int i){
@@ -32,7 +27,7 @@ int Mymap::insert(char* line, int i){
         return -1;
     }
     token = strtok(NULL, "\n");
-    while(token[0]=='0'){
+    while(token[0]==' '){
         token++;
     }
     int end = 0;
