@@ -16,9 +16,9 @@ void search(char* token, Trienode* trie, Mymap* map, int k)
         if (token == NULL)
             break;
         strcpy(warray[i], token);
+        // idf =  (no of doc - no of doc it is present) / (no. of doc it is present)
         IDF[i] = log10(((double)map->getsize() - (double)trie->dsearchword(warray[i], 0) + 0.5) / ((double)trie->dsearchword(warray[i], 0) + 0.5));
         trie->search(warray[i], 0, scorelist);
-        cout << "----->>>>" << token << endl;
         token = strtok(NULL, " \t\n");
     }
     double avgdl = 0;
@@ -32,11 +32,14 @@ void search(char* token, Trienode* trie, Mymap* map, int k)
     // cout << 1  << endl;
     while (templist != NULL)
     {
-        for (int l = 0; l < i; l++)
+        for (int l = 0; l < i; l++) {
+            //score = summaation(  )
             score += IDF[l] * ((double)trie->tfsearchword(templist->getid(), warray[l], 0) * (k1 + 1.0)) / ((double)trie->tfsearchword(templist->getid(), warray[l], 0) + k1 * (1.0 - b + b * (double)map->getlength(templist->getid()) / (double)avgdl));
+        }
         heap->insert(score, templist->getid());
         score = 0;
         templist = templist->getnext();
+
         ceil++;
     }
     if (ceil > k)
@@ -45,7 +48,7 @@ void search(char* token, Trienode* trie, Mymap* map, int k)
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     // cout << w.ws_row << endl;
     for (int l = 0; l < ceil; l++) {
-        
+
         int id = heap->getid();
         if (id == -1) {
             break;
@@ -74,7 +77,7 @@ void search(char* token, Trienode* trie, Mymap* map, int k)
         int ucounter = 0;
 
         while (temp != NULL) {
-            if (newline){   
+            if (newline) {
                 currlength += 20;
                 if (counter != 0) {
                     for (int co = 0; co < 20 ; co++) {
@@ -96,6 +99,7 @@ void search(char* token, Trienode* trie, Mymap* map, int k)
                 }
             }
             currlength += strlen(temp) + 1;
+            // cout << "curlength-1=" << currlength - 1 << ", w.ws_col=" << w.ws_col << endl ;
             if (currlength - 1 >= w.ws_col) {
                 currlength = 0;
                 newline = 1;
@@ -108,8 +112,9 @@ void search(char* token, Trienode* trie, Mymap* map, int k)
                     outputline[w.ws_col] = '\0';
                     for (int j = 0; j < ucounter; j++) {
 
-                        for (int v = underline[0][j]; v < underline[0][j] +  underline[1][j]; v++)
+                        for (int v = underline[0][j]; v < underline[0][j] +  underline[1][j]; v++) {
                             outputline[v] = '^';
+                        }
                     }
                     ucounter = 0;
                     cout << outputline;

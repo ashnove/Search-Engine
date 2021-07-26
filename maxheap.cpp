@@ -10,7 +10,7 @@ Maxheap::Maxheap(int k) : maxnumofscores(k), currnumofscores(0)
 int Maxheap::minindex(int low, int high)
 {
 	int min = -1;
-	double minscore = 1000000.0;
+	double minscore = 100000000.0;
 	for (int i = low; i < high; i++)
 	{
 		if (heap[i] < minscore)

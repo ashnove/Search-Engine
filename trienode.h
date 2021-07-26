@@ -6,10 +6,9 @@
 using namespace std;
 
 class Trienode {
-    Trienode *sibling;
-    Trienode* child;
+    bool isLast;
+    Trienode* child[256];
     listnode* list;
-    char value;
     public:
         Trienode();
         ~Trienode();
