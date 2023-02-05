@@ -6,6 +6,10 @@ To run the application, used command:
 ```
 ./engine -d <filename.txt> -k <number of doc>
 ```
+Example:
+```
+./engine -d dataSet1.txt -k 2
+```
 
 Features
 -----
